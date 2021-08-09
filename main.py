@@ -9,68 +9,73 @@ import time
 # My first Streamlit app
 """
 
-'Starting a long computation...'
+homePressed = st.sidebar.button('HOME')
+chartPressed = st.sidebar.button('CHARTS')
 
-# Add a placeholder
-latest_iteration = st.empty()
-bar = st.progress(0)
+if homePressed:
+  'Starting a long computation...'
 
-for i in range(3):
-  # Update the progress bar with each iteration.
-  latest_iteration.text(f'Iteration {i+1}')
-  bar.progress(i + 1)
-  time.sleep(0.1)
+  # Add a placeholder
+  latest_iteration = st.empty()
+  bar = st.progress(0)
 
-'...and now we\'re done!'
+  for i in range(5):
+    # Update the progress bar with each iteration.
+    latest_iteration.text(f'Iteration {i+1}')
+    bar.progress(i + 1)
+    time.sleep(0.1)
 
-st.image("media/isle_of_dog.gif", caption="My lovely dog")
+  '...and now we\'re done!'
 
-st.latex(r'''e^{i\pi} + 1 = 0''')
+  st.image("media/isle_of_dog.gif", caption="My lovely dog")
 
-# Chart
-df = pd.DataFrame({
-  'first column': [1, 2, 3, 4],
-  'second column': [10, 20, 30, 40]
-})
+  st.latex(r'''e^{i\pi} + 1 = 0''')
+elif chartPressed:
+  # Chart
+  df = pd.DataFrame({
+    'first column': [1, 2, 3, 4],
+    'second column': [10, 20, 30, 40]
+  })
 
-df
+  df
 
-# Line Chart
-chart_data = pd.DataFrame(
-     np.random.randn(20, 3),
-     columns=['a', 'b', 'c'])
+  # Line Chart
+  chart_data = pd.DataFrame(
+      np.random.randn(20, 3),
+      columns=['a', 'b', 'c'])
 
-st.line_chart(chart_data)
+  st.line_chart(chart_data)
 
-# Map
-map_data = pd.DataFrame(
-    np.random.randn(1000, 2) / [50, 50] + [37.76, -122.4],
-    columns=['lat', 'lon'])
+  # Map
+  map_data = pd.DataFrame(
+      np.random.randn(1000, 2) / [50, 50] + [37.76, -122.4],
+      columns=['lat', 'lon'])
 
-st.map(map_data)
+  st.map(map_data)
 
-# Conditional
-if st.checkbox('Show dataframe'):
-    chart_data = pd.DataFrame(
-       np.random.randn(20, 3),
-       columns=['a', 'b', 'c'])
+  # Conditional
+  if st.checkbox('Show dataframe'):
+      chart_data = pd.DataFrame(
+        np.random.randn(20, 3),
+        columns=['a', 'b', 'c'])
 
-    chart_data
+      chart_data
+else:
 
 
-option = st.sidebar.selectbox(
-    'Which number do you like best?',
-     df['first column'])
+  # option = st.sidebar.selectbox(
+  #     'Which number do you like best?',
+  #      df['first column'])
 
-'You selected:', option
+  # 'You selected:', option
 
-st.multiselect('Options', ['a', 'b', 'c', 'd'])
+  # st.multiselect('Options', ['a', 'b', 'c', 'd'])
 
-# Layout
-left_column, right_column = st.columns(2)
-pressed = left_column.button('Press me?')
-if pressed:
-  right_column.write("Woohoo!")
+  # Layout
+  left_column, right_column = st.columns(2)
+  pressed = left_column.button('Press me?')
+  if pressed:
+    right_column.write("Woohoo!")
 
-expander = st.expander("FAQ")
-expander.write("Here you could put in some really, really long explanations...")
+  expander = st.expander("FAQ")
+  expander.write("Here you could put in some really, really long explanations...")
